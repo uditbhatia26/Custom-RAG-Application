@@ -29,10 +29,11 @@ embeddings = HuggingFaceEmbeddings(model_name = 'all-MiniLM-L6-v2')
 llm = ChatGroq(model="llama-3.3-70b-versatile", api_key=groq_api_key)
 
 
-# Streamlit 
-st.set_page_config(page_title="Custom Themed Q&A Chatbot", page_icon="🤖")
-st.title("Snape Themed RAG QNA Chatbot")
-st.write("Upload the PDF Files")
+# Streamlit UI Customization (Hogwarts theme)
+st.set_page_config(page_title="Hogwarts Q&A Chatbot", page_icon="🦉")
+st.title("🦉 **Welcome to the Hogwarts Question-Answering Chatbot!** ⚡")
+st.subheader("Embark on a magical journey with our wise and powerful wizarding assistants. Upload your magical texts and ask away! 📚✨")
+
 session_id = "Default Session"
 
 
@@ -40,13 +41,15 @@ if 'store' not in st.session_state:
     st.session_state.store = {}
 
 
-uploaded_files = st.file_uploader(label = 'Upload you PDF Files', type='pdf', accept_multiple_files=True)
+uploaded_files = st.file_uploader(label='🔮 Upload your magical scrolls (PDF files)', type='pdf', accept_multiple_files=True)
+
 
 def get_session_history(session_id):
     if session_id not in st.session_state.store:
         st.session_state.store[session_id] = ChatMessageHistory()
 
     return st.session_state.store[session_id]
+
 
 # Whenever a document is uploaded it is split and embedded
 if uploaded_files:
@@ -82,12 +85,13 @@ if uploaded_files:
 
 
     sys_prompt = (
-    "You are a fictional character: Severus Snape."
-    "You need to behave and respond like him."
-    "Mock the user as muggle and use disrespectful references from novel: Harry Potter."
-    "You are an assistant for question-answering tasks."
-    "Use the following pieces of retrieved context to answer the question."
-    "If you don't know the answer just say you don't know"
+    "You are a powerful wizard from the magical world of Hogwarts."
+    "Your demeanor is proud and wise, yet you are not without wit."
+    "Respond to the questions with your characteristic charm and intellect."
+    "You may also throw in some magical references from the Harry Potter universe."
+    "You are an assistant for answering questions in a fantastical and magical style."
+    "Use the following pieces of context to answer the question."
+    "If you do not know the answer, simply say: 'I do not know, young wizard.'"
     "\n\n"
     "{context}"
     )
@@ -97,7 +101,6 @@ if uploaded_files:
             ("system", sys_prompt),
             MessagesPlaceholder("chat_history"),
             ('user', '{input}'),
-
         ]
     )
 
@@ -114,16 +117,11 @@ if uploaded_files:
     )
 
 
-    user_input = st.text_input(label='Enter your query.')
+    user_input = st.text_input(label='🧙‍♂️ Enter your magical query:')
     if user_input:
         session_histtory = get_session_history(session_id=session_id)
         response = conversational_chain.invoke(
             {'input': user_input},
             config={'configurable': {'session_id': session_id}}
         )
-        st.write("Assistant: ", response['answer'])
-
-
-
-
-
+        st.write("🦉 **Assistant**: ", response['answer'])
