@@ -43,7 +43,7 @@ st.title("📘✨ **Welcome to the Magical NCERT RAG System!** 🪄")
 st.subheader("Unlock the magic of learning! Upload your NCERT chapters and let our enchanting assistant simplify them for you. 🧙‍♂️📚")
 st.markdown(
     """
-    **Embark on an insightful journey where NCERT textbooks meet the power of magical summarization!**
+    **Embark on an insightful journey where NCERT textbooks meet the power of RAG!**
     Upload your documents, whether it's an NCERT book, research paper, or any text-based content, and let the magic of AI bring concise summaries and insightful answers to your questions.  
     \n\n⚡ _Remember, this tool isn't limited to NCERT books—feed it any document and explore its capabilities!_ ✨
     """
