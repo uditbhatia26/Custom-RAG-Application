@@ -1,13 +1,11 @@
-# Hogwarts Q&A Chatbot
 
-A **Hogwarts-themed Q&A Chatbot** built using LangChain, FAISS, and ChatGroq. This chatbot allows users to upload PDF documents, and it answers queries by retrieving relevant information from those documents with a retrieval-augmented generation (RAG) approach. The responses are given in a magical style, inspired by the Harry Potter universe.
+# Education-Focused Hogwarts-Themed Q&A Chatbot
+
+An interactive chatbot built with LangChain, FAISS, and ChatGroq that combines education and magic! This project uses a retrieval-augmented generation (RAG) pipeline to answer queries based on uploaded PDF documents like textbooks, research papers, or notes. Users enjoy detailed answers with a whimsical Hogwarts-inspired interface.
 
 ## Features
-- **PDF Upload:** Upload multiple PDF documents for processing.
-- **Q&A:** Ask questions related to the uploaded documents, and receive answers in a magical, Hogwarts-inspired tone.
-- **RAG Approach:** Combines retrieval and generation to answer questions using the most relevant context.
-- **Streamlit UI:** Interactive user interface to interact with the chatbot.
 
-## Requirements
-- Python 3.7+
-- Install dependencies via `pip install -r requirements.txt`
+- **Document Uploads:** Upload PDFs (textbooks, research papers, notes, etc.) for processing.
+- **RAG Pipeline:** Combines document retrieval with generative AI for accurate and context-aware answers.
+- **Magical Responses:** Answers delivered with a unique Hogwarts-themed style.
+- **Interactive UI:** Built with Streamlit for a user-friendly and immersive experience.
