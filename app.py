@@ -14,9 +14,17 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
+# For local testing
 groq_api_key = os.getenv("GROQ_API_KEY")
 os.environ['HF_TOKEN'] = os.getenv("HF_TOKEN")
 os.environ['LANGCHAIN_API_KEY'] = os.getenv("LANGCHAIN_API_KEY")
+os.environ["LANGCHAIN_PROJECT"] = "CUSTOM RAG QNA"
+os.environ["LANGCHAIN_TRACKING_V2"] = 'true'
+
+# For deployment on Streamlit Cloud
+groq_api_key = st.secrets[b"GROQ_API_KEY"]
+os.environ['HF_TOKEN'] = st.secrets["HF_TOKEN"]
+os.environ['LANGCHAIN_API_KEY'] = st.secrets["LANGCHAIN_API_KEY"]
 os.environ["LANGCHAIN_PROJECT"] = "CUSTOM RAG QNA"
 os.environ["LANGCHAIN_TRACKING_V2"] = 'true'
 
@@ -26,7 +34,7 @@ embeddings = HuggingFaceEmbeddings(model_name = 'all-MiniLM-L6-v2')
 
 
 # Creating the LLM
-llm = ChatGroq(model="llama-3.3-70b-versatile", api_key=groq_api_key)
+llm = ChatGroq(model="gemma2-9b-it", api_key=groq_api_key)
 
 
 # Streamlit UI Customization (Hogwarts theme)
@@ -119,19 +127,15 @@ if uploaded_files:
     )
 
     for message in st.session_state.messages:
-        if message['role'] == "Assistant":
-            st.chat_message(message['role'], avatar='🧙‍♂️').write(message['content'])
-        else:
             st.chat_message(message['role']).write(message['content'])
 
     if user_input:= st.chat_input(placeholder='What are diffusion Models?'):
-        session_histtory = get_session_history(session_id=session_id)
-        st.session_state.messages.append({'role':'user', 'content':user_input})
         st.chat_message('user').write(user_input)
+        st.session_state.messages.append({'role':'user', 'content':user_input})
         response = conversational_chain.invoke(
             {'input': user_input},
             config={'configurable': {'session_id': session_id}}
         )
-        with st.chat_message('assistant', avatar='🧙‍♂️'):
-            st.session_state.messages.append({'role': 'assistant', 'content':response})
+        with st.chat_message('assistant'):
+            st.session_state.messages.append({'role': 'assistant', 'content':response['answer']})
             st.write(response['answer'])
