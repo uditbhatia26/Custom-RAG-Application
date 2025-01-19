@@ -38,8 +38,8 @@ llm = ChatGroq(model="gemma2-9b-it", api_key=groq_api_key)
 
 
 # Streamlit UI Customization (Hogwarts theme)
-st.set_page_config(page_title="Magical NCERT Summarizer", page_icon="✨")
-st.title("📘✨ **Welcome to the Magical NCERT Summarizer!** 🪄")
+st.set_page_config(page_title="Magical NCERT RAG", page_icon="✨")
+st.title("📘✨ **Welcome to the Magical NCERT RAG System!** 🪄")
 st.subheader("Unlock the magic of learning! Upload your NCERT chapters and let our enchanting assistant simplify them for you. 🧙‍♂️📚")
 st.markdown(
     """
