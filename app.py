@@ -34,7 +34,7 @@ embeddings = HuggingFaceEmbeddings(model_name = 'all-MiniLM-L6-v2')
 
 
 # Creating the LLM
-llm = ChatGroq(model="gemma2-9b-it", api_key=groq_api_key)
+llm = ChatGroq(model="llama-3.3-70b-versatile", api_key=groq_api_key)
 
 
 # Streamlit UI Customization (Hogwarts theme)
