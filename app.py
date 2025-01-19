@@ -38,9 +38,17 @@ llm = ChatGroq(model="gemma2-9b-it", api_key=groq_api_key)
 
 
 # Streamlit UI Customization (Hogwarts theme)
-st.set_page_config(page_title="Hogwarts Q&A Chatbot", page_icon="🦉")
-st.title("🦉 **Welcome to the Hogwarts Question-Answering Chatbot!** ⚡")
-st.subheader("Embark on a magical journey with our wise and powerful wizarding assistants. Upload your magical texts and ask away! 📚✨")
+st.set_page_config(page_title="Magical NCERT Summarizer", page_icon="✨")
+st.title("📘✨ **Welcome to the Magical NCERT Summarizer!** 🪄")
+st.subheader("Unlock the magic of learning! Upload your NCERT chapters and let our enchanting assistant simplify them for you. 🧙‍♂️📚")
+st.markdown(
+    """
+    **Embark on an insightful journey where NCERT textbooks meet the power of magical summarization!**
+    Upload your documents, whether it's an NCERT book, research paper, or any text-based content, and let the magic of AI bring concise summaries and insightful answers to your questions.  
+    \n\n⚡ _Remember, this tool isn't limited to NCERT books—feed it any document and explore its capabilities!_ ✨
+    """
+)
+
 
 session_id = "Default Session"
 
