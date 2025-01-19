@@ -37,9 +37,11 @@ st.subheader("Embark on a magical journey with our wise and powerful wizarding a
 session_id = "Default Session"
 
 
+if 'messages' not in st.session_state:
+    st.session_state['messages'] = [{"role": "Assistant", "content":"Speak your query, and I shall assist you with precision and purpose... today"}]
+
 if 'store' not in st.session_state:
     st.session_state.store = {}
-
 
 uploaded_files = st.file_uploader(label='🔮 Upload your magical scrolls (PDF files)', type='pdf', accept_multiple_files=True)
 
@@ -116,12 +118,20 @@ if uploaded_files:
         output_messages_key='answer',
     )
 
+    for message in st.session_state.messages:
+        if message['role'] == "Assistant":
+            st.chat_message(message['role'], avatar='🧙‍♂️').write(message['content'])
+        else:
+            st.chat_message(message['role']).write(message['content'])
 
-    user_input = st.text_input(label='🧙‍♂️ Enter your magical query:')
-    if user_input:
+    if user_input:= st.chat_input(placeholder='What are diffusion Models?'):
         session_histtory = get_session_history(session_id=session_id)
+        st.session_state.messages.append({'role':'user', 'content':user_input})
+        st.chat_message('user').write(user_input)
         response = conversational_chain.invoke(
             {'input': user_input},
             config={'configurable': {'session_id': session_id}}
         )
-        st.write("🦉 **Assistant**: ", response['answer'])
+        with st.chat_message('assistant', avatar='🧙‍♂️'):
+            st.session_state.messages.append({'role': 'assistant', 'content':response})
+            st.write(response['answer'])
